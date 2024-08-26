@@ -16,7 +16,7 @@
         owner = "SELinuxProject";
         repo = "refpolicy";
         rev = "RELEASE_2_20240226";	  # a tag
-        hash = "7ed41f4f45189b9ee9706da8ac357eccc103651b56daabaddb54c436e8117cf9";
+        hash = "SHA-256:7ed41f4f45189b9ee9706da8ac357eccc103651b56daabaddb54c436e8117cf9";
       };
     };
   };
