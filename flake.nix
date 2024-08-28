@@ -62,10 +62,11 @@
         make install-src topdir=$out
       '';
 
-#      postInstall = ''
-#        cd $(out)
-#        make conf
-#      '';
+      postInstall = ''
+        pwd
+        echo $out
+        cd $out
+      '';
 
 
 
