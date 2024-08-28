@@ -47,7 +47,6 @@
 
       buildPhase = ''
         pwd
-        tree
         cd ${src}
         pwd
         make install-src
