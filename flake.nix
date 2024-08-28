@@ -57,6 +57,8 @@
       installPhase = ''
         pwd
         echo $out
+        cd refpolicy
+        pwd
         make install-src topdir=$out
       '';
 
