@@ -55,7 +55,8 @@
       installTargets = [ "install-src" ];
 
       postInstall = ''
-        pwd
+        cd $(out)
+        make conf
       '';
 
 
