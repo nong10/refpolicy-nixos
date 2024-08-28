@@ -13,7 +13,7 @@
             #prePatch = ''
             #  git apply "${./conf-parse.y.patch}"
             #'';
-            patches = [ "${./conf-parse.y.patchh}" ];
+            patches = [ "${./conf-parse.y.patch}" ];
           };
         })
       ];
@@ -41,7 +41,6 @@
 #      installTargets = [ "install-src" ];
 
       installPhase = ''
-        lll
         export AWK="${pkgs.gawk}/bin/awk" 
         export GREP="${pkgs.gnugrep}/bin/grep -E" 
         export INSTALL="${pkgs.coreutils}/bin/install" 
