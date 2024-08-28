@@ -6,6 +6,7 @@
   outputs = { self, nixpkgs, ... }@inputs: 
   let 
     pkgs = import nixpkgs { 
+      system = "x86_64-linux";
       overlays = [ 
         (final: prev: {
           libsemanage = prev.libsemanage.overrideAttrs {
