@@ -10,9 +10,10 @@
       overlays = [ 
         (final: prev: {
           libsemanage = prev.libsemanage.overrideAttrs {
-            prePatch = ''
-              git apply "${./conf-parse.y.patch}"
-            '';
+            #prePatch = ''
+            #  git apply "${./conf-parse.y.patch}"
+            #'';
+            patches = [ "${./conf-parse.y.patchh}" ];
           };
         })
       ];
