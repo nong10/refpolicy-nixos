@@ -67,6 +67,7 @@
         echo $out
         cd $out
         make conf
+        make load
       '';
 
 
