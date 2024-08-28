@@ -46,6 +46,7 @@
         export SECHECK="${pkgs.setools}/bin/sechecker"
         export XMLLINT="${pkgs.libxml2}/bin/xmllint"
         echo "${out}"
+        ls ${out}
         make install-src topdir=${out}
         cd ${out} 
         make conf
