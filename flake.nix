@@ -51,13 +51,19 @@
         #make conf
       '';
 
-      installFlags = [ "topdir=$(out)" ];
-      installTargets = [ "install-src" ];
+#      installFlags = [ "topdir=$(out)" ];
+#      installTargets = [ "install-src" ];
 
-      postInstall = ''
-        cd $(out)
-        make conf
+      installPhase = ''
+        pwd
+        echo $(out)
+        make install-src topdir=$(out)
       '';
+
+#      postInstall = ''
+#        cd $(out)
+#        make conf
+#      '';
 
 
 
