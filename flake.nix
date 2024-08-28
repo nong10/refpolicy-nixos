@@ -9,10 +9,6 @@
       overlays = [ 
         (final: prev: {
           libsemanage = prev.libsemanage.overrideAttrs {
-            prePatch = ''
-              pwd
-              ls
-            ''; 
             patchPhase = ''
               patch -p1 "${./conf-parse.y.patch}"
             '';
@@ -37,9 +33,39 @@
 
 
       preInstall = ''
+      '';
+
+#      installFlags = [ "topdir=$(out)" ];
+#      installTargets = [ "install-src" ];
+
+      installPhase = ''
+        export AWK="${pkgs.gawk}/bin/awk" 
+        export GREP="${pkgs.gnugrep}/bin/grep -E" 
+        export INSTALL="${pkgs.coreutils}/bin/install" 
+        export M4="${pkgs.gnum4}/bin/m4 -E -E" 
+        export PYTHON="${pkgs.python311}/bin/python3 -bb -t -t -E -W error"
+        export SORT="LC_ALL=C ${pkgs.coreutils}/bin/sort"
+        export SED="${pkgs.gnused}/bin/sed" 
+        export CHECKPOLICY="${pkgs.checkpolicy}/bin/checkpolicy" 
+        export CHECKMODULE="${pkgs.checkpolicy}/bin/checkmodule"
+        export SEMODULE="${pkgs.policycoreutils}/bin/semodule"
+        export SEMOD_PKG="${pkgs.semodule-utils}/bin/semodule_package"
+        export SEMOD_LNK="${pkgs.semodule-utils}/bin/semodule_link"
+        export SEMOD_EXP="${pkgs.semodule-utils}/bin/semodule_expand"
+        export LOADPOLICY="${pkgs.policycoreutils}/bin/load_policy"
+        export SEPOLGEN_IFGEN="${pkgs.selinux-python}/bin/sepolgen-ifgen"
+        export SETFILES="${pkgs.policycoreutils}/bin/setfiles"
+        export SEFCONTEXT_COMPILE="${pkgs.libselinux}/bin/sefcontext_compile"
+        export SECHECK="${pkgs.setools}/bin/sechecker"
+        export XMLLINT="${pkgs.libxml2}/bin/xmllint"
         pwd
+        echo $out
         cd refpolicy
         pwd
+        make install-src topdir=$out
+      '';
+
+      fixupPhase = ''
         export AWK="${pkgs.gawk}/bin/awk" 
         export GREP="${pkgs.gnugrep}/bin/grep -E" 
         export INSTALL="${pkgs.coreutils}/bin/install" 
@@ -64,27 +90,10 @@
         #make install-src topdir=${out}
         #cd ${out} 
         #make conf
-      '';
-
-#      installFlags = [ "topdir=$(out)" ];
-#      installTargets = [ "install-src" ];
-
-      installPhase = ''
-        pwd
-        echo $out
-        cd refpolicy
-        pwd
-        make install-src topdir=$out
-      '';
-
-      fixupPhase = ''
         cd $out/refpolicy/src/policy
         make conf
         make load
       '';
-
-
-
 
       nativeBuildInputs = [
         tree
