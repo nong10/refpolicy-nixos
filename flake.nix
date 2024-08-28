@@ -47,7 +47,7 @@
 
       buildPhase = ''
         pwd
-        cd ${src}
+        cd refpolicy
         pwd
         make install-src
         cd ${out} 
