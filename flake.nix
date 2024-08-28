@@ -62,12 +62,9 @@
         make install-src topdir=$out
       '';
 
-      postInstall = ''
-        pwd
-        echo $out
-        cd $out
+      fixupPhase = ''
+        cd $out/refpolicy/src/policy
         make conf
-        make load
       '';
 
 
@@ -75,7 +72,7 @@
 
       nativeBuildInputs = [
         tree
-
+        getopt
         git
         gawk	      # awk
         gnugrep	    # grep
@@ -83,7 +80,13 @@
         gnused	    # sed
         gnumake	    # make
         gnum4	      # m4
-        policycoreutils # semodule
+        pkgs.applyPatches {
+          src = pkgs.policycoreutils;
+          patches = [
+            (pkgs.writeText "" '''')
+          ];
+        }
+        #policycoreutils # semodule
         checkpolicy     # checkpolicy checkmodule
         semodule-utils  # semodule_link semodule_unpackage semodule_expand semodule_package
         setools         # sechecker
