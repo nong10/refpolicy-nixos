@@ -46,6 +46,8 @@
       ];
 
       buildPhase = ''
+        pwd
+        tree
         make install-src
         cd ${out} 
         make conf
