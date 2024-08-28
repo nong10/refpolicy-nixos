@@ -66,6 +66,7 @@
         pwd
         echo $out
         cd $out
+        make conf
       '';
 
 
