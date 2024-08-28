@@ -10,8 +10,8 @@
       overlays = [ 
         (final: prev: {
           libsemanage = prev.libsemanage.overrideAttrs {
-            patchPhase = ''
-              patch -p1 "${./conf-parse.y.patch}"
+            prePatch = ''
+              git apply "${./conf-parse.y.patch}"
             '';
           };
         })
@@ -40,6 +40,7 @@
 #      installTargets = [ "install-src" ];
 
       installPhase = ''
+        lll
         export AWK="${pkgs.gawk}/bin/awk" 
         export GREP="${pkgs.gnugrep}/bin/grep -E" 
         export INSTALL="${pkgs.coreutils}/bin/install" 
