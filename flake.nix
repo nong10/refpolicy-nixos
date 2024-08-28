@@ -27,7 +27,6 @@
         cd refpolicy
         pwd
         export ( \
-          topdir = ${out} \
           AWK="${pkgs.gawk}/bin/awk"  \
           GREP="${pkgs.gnugrep}/bin/grep -E"  \
           INSTALL="${pkgs.coreutils}/bin/install"  \
@@ -48,7 +47,7 @@
           SECHECK="${pkgs.setools}/bin/sechecker" \
           XMLLINT="${pkgs.libxml2}/bin/xmllint" \
         )
-        make install-src
+        make topdir=${out} install-src
         cd ${out} 
         make conf
       '';
