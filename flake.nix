@@ -80,6 +80,7 @@
       fixupPhase = ''
         cd $out/refpolicy/src/policy
         make conf
+        make load
       '';
 
 
