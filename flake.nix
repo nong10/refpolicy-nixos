@@ -12,6 +12,7 @@
             prePatch = ''
               pwd
               ls
+              patch --version
             ''; 
             patches = [ ./conf-parse.y.patch ];
           };
