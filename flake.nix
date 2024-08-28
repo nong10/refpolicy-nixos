@@ -21,8 +21,7 @@
       };
 
 
-
-      buildPhase = ''
+      installPhase = ''
         pwd
         cd refpolicy
         pwd
