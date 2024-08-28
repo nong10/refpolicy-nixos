@@ -21,7 +21,7 @@
       };
 
 
-      installPhase = ''
+      preInstall = ''
         pwd
         cd refpolicy
         pwd
@@ -44,12 +44,20 @@
         export SEFCONTEXT_COMPILE="${pkgs.libselinux}/bin/sefcontext_compile"
         export SECHECK="${pkgs.setools}/bin/sechecker"
         export XMLLINT="${pkgs.libxml2}/bin/xmllint"
-        echo "${out}"
-        ls ${out}
-        make install-src topdir=${out}
-        cd ${out} 
-        make conf
+        #echo "${out}"
+        #ls ${out}
+        #make install-src topdir=${out}
+        #cd ${out} 
+        #make conf
       '';
+
+      installFlags = [ "topdir=$(out)" ];
+      installTargets = [ "install-src" ];
+
+      postInstall = ''
+        pwd
+      '';
+
 
 
 
