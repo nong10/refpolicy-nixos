@@ -1,0 +1,38 @@
+--- a/src/conf-parse.y      2024-08-27 15:48:20.094331321 +0000
++++ b/src/conf-parse.y      2024-08-27 16:06:57.514785742 +0000
+@@ -353,7 +353,7 @@
+        conf->store_path = strdup(basename(selinux_policy_root()));
+        conf->ignoredirs = NULL;
+        conf->store_root_path = strdup("/var/lib/selinux");
+-       conf->compiler_directory_path = strdup("/usr/libexec/selinux/hll");
++       conf->compiler_directory_path = strdup("${pkgs.policycoreutils}/libexec/selinux/hll");
+        conf->policyvers = sepol_policy_kern_vers_max();
+        conf->target_platform = SEPOL_TARGET_SELINUX;
+        conf->expand_check = 1;
+@@ -377,7 +377,7 @@
+        if (access("/sbin/load_policy", X_OK) == 0) {
+                conf->load_policy->path = strdup("/sbin/load_policy");
+        } else {
+-               conf->load_policy->path = strdup("/usr/sbin/load_policy");
++               conf->load_policy->path = strdup("${pkgs.policycoreutils}/bin/load_policy");
+        }
+        if (conf->load_policy->path == NULL) {
+                return -1;
+@@ -391,7 +391,7 @@
+        if (access("/sbin/setfiles", X_OK) == 0) {
+                conf->setfiles->path = strdup("/sbin/setfiles");
+        } else {
+-               conf->setfiles->path = strdup("/usr/sbin/setfiles");
++               conf->setfiles->path = strdup("${pkgs.policycoreutils}bin/setfiles");
+        }
+        if ((conf->setfiles->path == NULL) ||
+            (conf->setfiles->args = strdup("-q -c $@ $<")) == NULL) {
+@@ -405,7 +405,7 @@
+        if (access("/sbin/sefcontext_compile", X_OK) == 0) {
+                conf->sefcontext_compile->path = strdup("/sbin/sefcontext_compile");
+        } else {
+-               conf->sefcontext_compile->path = strdup("/usr/sbin/sefcontext_compile");
++               conf->sefcontext_compile->path = strdup("${pkgs.libselinux}/bin/sefcontext_compile");
+        }
+        if ((conf->sefcontext_compile->path == NULL) ||
+            (conf->sefcontext_compile->args = strdup("$@")) == NULL) {

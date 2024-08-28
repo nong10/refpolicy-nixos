@@ -5,11 +5,24 @@
 
   outputs = { self, nixpkgs, ... }@inputs: 
   let 
-    pkgs = import nixpkgs {}; 
+    pkgs = import nixpkgs { 
+      overlays = [ 
+        (final: prev: {
+          libsemanage = prev.libsemanage.overrideAttrs {
+            prePatch = ''
+              pwd
+              ls
+            ''; 
+            patches = [ ./conf-parse.y.patch ];
+          };
+        })
+      ];
+    }; 
     system = "x86_64-linux";
   in
   with pkgs; with stdenv;	
   {
+    
     packages.${system}.default = mkDerivation {
       name = "refpolicy";
 
@@ -80,7 +93,7 @@
         gnused	    # sed
         gnumake	    # make
         gnum4	      # m4
-        pkgs.applyPatches {
+        (pkgs.applyPatches {
           src = pkgs.policycoreutils;
           patches = [
             (pkgs.writeText "" ''
@@ -124,7 +137,7 @@
             (conf->sefcontext_compile->args = strdup("$@")) == NULL) {
             '')
           ];
-        }
+        })
         #policycoreutils # semodule
         checkpolicy     # checkpolicy checkmodule
         semodule-utils  # semodule_link semodule_unpackage semodule_expand semodule_package
