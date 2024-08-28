@@ -45,8 +45,8 @@
         export SEFCONTEXT_COMPILE="${pkgs.libselinux}/bin/sefcontext_compile"
         export SECHECK="${pkgs.setools}/bin/sechecker"
         export XMLLINT="${pkgs.libxml2}/bin/xmllint"
-        make install-src topdir=${out}
         echo "${out}"
+        make install-src topdir=${out}
         cd ${out} 
         make conf
       '';
