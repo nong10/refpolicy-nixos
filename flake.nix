@@ -22,9 +22,6 @@
 
 
       preInstall = ''
-        pwd
-        cd refpolicy
-        pwd
         export AWK="${pkgs.gawk}/bin/awk" 
         export GREP="${pkgs.gnugrep}/bin/grep -E" 
         export INSTALL="${pkgs.coreutils}/bin/install" 
