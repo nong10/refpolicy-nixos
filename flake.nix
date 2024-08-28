@@ -56,8 +56,8 @@
 
       installPhase = ''
         pwd
-        echo $(out)
-        make install-src topdir=$(out)
+        echo $out
+        make install-src topdir=$out
       '';
 
 #      postInstall = ''
