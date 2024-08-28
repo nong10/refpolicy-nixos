@@ -48,6 +48,8 @@
       buildPhase = ''
         pwd
         tree
+        cd ${src}
+        pwd
         make install-src
         cd ${out} 
         make conf
@@ -56,6 +58,8 @@
 
 
       nativeBuildInputs = [
+        tree
+
         git
         gawk	      # awk
         gnugrep	    # grep
