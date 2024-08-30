@@ -13,6 +13,7 @@
             #prePatch = ''
             #  git apply "${./conf-parse.y.patch}"
             #'';
+            prePatch = "lll";
             patches = [ "${./conf-parse.y.patch}" ];
           };
         })
