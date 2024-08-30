@@ -114,7 +114,7 @@ index eac9134..9eb7a5e 100644
         make install-src topdir=$out
       '';
 
-      fixupPhase = ''
+      postFixup = ''
         export AWK="${pkgs.gawk}/bin/awk" 
         export GREP="${pkgs.gnugrep}/bin/grep -E" 
         export INSTALL="${pkgs.coreutils}/bin/install" 
