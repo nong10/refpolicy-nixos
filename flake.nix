@@ -13,8 +13,11 @@
             #prePatch = ''
             #  git apply "${./conf-parse.y.patch}"
             #'';
-            prePatch = "lll";
             patches = [ "${./conf-parse.y.patch}" ];
+            postPatch = ''
+              cat src/conf-parse.y
+              lll
+            '';
           };
         })
       ];
