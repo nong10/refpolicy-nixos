@@ -13,7 +13,7 @@
             #prePatch = ''
             #  git apply "${./conf-parse.y.patch}"
             #'';
-						patches = [ pkgs.writeText ''
+						patches = [ pkgs.writeText "conf-parse.y.patch" ''
 diff --git a/src/conf-parse.y b/src/conf-parse.y
 index eac9134..9eb7a5e 100644
 --- a/src/conf-parse.y
