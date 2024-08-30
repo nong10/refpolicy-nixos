@@ -10,9 +10,9 @@ index eac9134..9eb7a5e 100644
 +	conf->compiler_directory_path = strdup("${pkgs.policycoreutils}/libexec/selinux/hll");
  	conf->policyvers = sepol_policy_kern_vers_max();
  	conf->target_platform = SEPOL_TARGET_SELINUX;
- 	conf->expand_check = 1;
+	conf->expand_check = 1;
 @@ -377,7 +377,7 @@ static int semanage_conf_init(semanage_conf_t * conf)
- 	if (access("/sbin/load_policy", X_OK) == 0) {
+	if (access("/sbin/load_policy", X_OK) == 0) {
  		conf->load_policy->path = strdup("/sbin/load_policy");
  	} else {
 -		conf->load_policy->path = strdup("/usr/sbin/load_policy");
